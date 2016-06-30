@@ -1,0 +1,34 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --parallel --fail-missing --with autoreconf,autotools_dev
+
+# build simple version first #
+override_dh_auto_configure:
+	dh_auto_configure  -- \
+		--with-htmldir=/usr/share/doc/geeqie/html \
+		--with-readmedir=/usr/share/doc/geeqie/ \
+		--enable-lirc \
+		--disable-gtk3
+
+override_dh_auto_install:
+	mkdir -p $(CURDIR)/debian/tmp/usr/share/doc/geeqie/html
+	dh_auto_install
+	rm -f \
+		$(CURDIR)/debian/tmp/usr/share/geeqie/template.desktop \
+		$(CURDIR)/debian/tmp/usr/share/doc/geeqie/README.lirc \
+		$(CURDIR)/debian/tmp/usr/share/doc/geeqie/ChangeLog \
+		$(CURDIR)/debian/tmp/usr/share/doc/geeqie/TODO \
+		$(CURDIR)/debian/tmp/usr/share/doc/geeqie/README \
+		$(CURDIR)/debian/tmp/usr/share/doc/geeqie/COPYING
+
+override_dh_compress:
+	# Readme is shown from program, do not compress it
+	dh_compress -XREADME
+
+override_dh_strip:
+	dh_strip -a --ddeb-migration='geeqie-dbg (<< 1:1.2.3-1~)'
+
+override_dh_autoreconf:
+	dh_autoreconf
+	intltoolize --copy --force --automake

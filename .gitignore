@@ -70,7 +70,6 @@ Makefile.in
 /src/icons/icons_inline.h
 
 /build-stamp
-/debian/geeqie*
 /debian/files
 /doc/html/
 

@@ -1,0 +1,59 @@
+Source: geeqie
+Section: graphics
+Priority: optional
+Maintainer: Michal Čihař <nijel@debian.org>
+Build-Depends: debhelper (>= 9),
+    dpkg-dev (>= 1.16.1~),
+    dh-autoreconf,
+    gnome-doc-utils,
+    libtool,
+    autoconf,
+    automake,
+    autotools-dev,
+    libgtk2.0-dev,
+    libexiv2-dev,
+    liblcms2-dev,
+    liblircclient-dev,
+    intltool,
+    gnome-doc-utils,
+    imagemagick,
+    libtiff-dev,
+    libjpeg-dev,
+    liblua5.1-0-dev
+Build-Conflicts: libexiv2-dev (= 0.19-2)
+Standards-Version: 3.9.8
+Homepage: http://geeqie.org/
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/geeqie.git
+Vcs-Git: git://anonscm.debian.org/collab-maint/geeqie.git
+
+Package: geeqie
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, geeqie-common (= ${source:Version})
+Recommends: exiftran,
+    exiv2,
+    ufraw-batch,
+    zenity,
+    imagemagick,
+    librsvg2-common,
+    cups-bsd | lpr
+Suggests: gimp, xpaint, geeqie-dbg, libjpeg-progs, ufraw
+Breaks: gqview (<< 1:1.0~beta2-3)
+Replaces: gqview
+Description: image viewer using GTK+
+ Geeqie is a browser for graphics files offering single click viewing of
+ your graphics files. It includes thumbnail view, zoom, filtering
+ features and external editor support.
+
+Package: geeqie-common
+Architecture: all
+Recommends: geeqie
+Depends: ${misc:Depends}
+Replaces: geeqie (<< 1:1.0~beta2-7)
+Breaks: geeqie (<< 1:1.0~beta2-7)
+Description: data files for Geeqie
+ Geeqie is a browser for graphics files offering single click viewing of
+ your graphics files. It includes thumbnail view, zoom, filtering
+ features and external editor support.
+ .
+ This package contains data files for Geeqie such as documentation or
+ locales.
